@@ -9,7 +9,7 @@ Automatyczne podlewanie kwiatkow w 2 doniczkach. Połączone ze stroną internet
 ### Description
 
 ### Tools
-2 x STM32F411E-DISCO
+2 x STM32F411E-DISCO\
 2 x esp8266
 
 ### How to run
