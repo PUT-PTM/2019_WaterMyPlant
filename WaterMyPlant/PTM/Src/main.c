@@ -40,6 +40,8 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
+#include "esp.h"
+
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -74,7 +76,9 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	uint flag = 0;
+	uint8_t sendUART[4] = {"AT\r\n"};
+		uint16_t sizeSendUART = 4;
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -104,6 +108,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+//	  	 for(int i = 0 ; i < 20000000; i++);
+	  HAL_Delay(1000);
+	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
+
+//	  HAL_UART_Transmit_IT(&huart2, sendUART, sizeSendUART);
+	  ConfigESP(huart2);
 
   /* USER CODE END WHILE */
 
