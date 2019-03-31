@@ -10,7 +10,12 @@ Automatyczne podlewanie kwiatkow w 2 doniczkach. Połączone ze stroną internet
 
 ### Tools
 2 x STM32F411E-DISCO\
-2 x esp8266
+2 x esp8266\
+2 x moisture sensor\
+2 x water level sensor\
+2 x water pump
+4 x tasma LED RGB
+
 
 ### How to run
 
