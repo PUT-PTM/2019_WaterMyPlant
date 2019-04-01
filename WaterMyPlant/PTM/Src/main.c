@@ -106,16 +106,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  	 for(int i = 0 ; i < 20000000; i++);
 	  HAL_Delay(1000);
 	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
 
 //	  HAL_UART_Transmit_IT(&huart2, sendUART, sizeSendUART);
-	  if(flag == 0)
-	  {
-		  ConfigESP(&huart2);
-		  flag = 1;
-	  }
+//	  if(flag == 0)
+//	  {
+//		  ConfigESP(&huart2);
+//		  flag = 1;
+//	  }
 
 	  ConfigESP(&huart2);
   /* USER CODE END WHILE */
