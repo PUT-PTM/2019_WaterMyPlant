@@ -76,9 +76,7 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	uint flag = 0;
-	uint8_t sendUART[4] = {"AT\r\n"};
-		uint16_t sizeSendUART = 4;
+	int flag = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -113,8 +111,13 @@ int main(void)
 	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
 
 //	  HAL_UART_Transmit_IT(&huart2, sendUART, sizeSendUART);
-	  ConfigESP(huart2);
+	  if(flag == 0)
+	  {
+		  ConfigESP(&huart2);
+		  flag = 1;
+	  }
 
+	  ConfigESP(&huart2);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
