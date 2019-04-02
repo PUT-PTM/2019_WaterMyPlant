@@ -42,6 +42,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "esp.h"
+#include "stringOperations.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -49,6 +50,8 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+uint8_t receiveUART[500];
+uint16_t sizeReceiveUART = 500;
 
 /* USER CODE END PV */
 
@@ -59,6 +62,16 @@ static void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	// dodana obsluga przerwania dla UART2
+	if(huart->Instance == USART2){
+
+       HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+
+
+       // if( containtsStage(receiveUART) ) -> podlej kwiata
+   }
+}
 
 /* USER CODE END PFP */
 
