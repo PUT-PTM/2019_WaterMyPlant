@@ -12,15 +12,6 @@
 
 
 /*
- * plik do obslugi polecen wysylaych na ESP 8266
- *
- *
- * ---- TODO ----
- *  1. Dopisac funkcje sendUART, ktora przyjmuje parametry, wielkosc tablicy i tresc przesylanej wadomosci
- *  2. Dopisac dzialajaca funkcje //void ConnectToWiFi(UART_HandleTypeDef *huart2, char* ssid, char* pass) po to, zeby podawac rozne WiFi
- */
-
-/*
  * Function prototypes
  */
 
@@ -39,11 +30,11 @@ void AT_GET(UART_HandleTypeDef *huart2);
 void ConfigESP(UART_HandleTypeDef *huart2)
 {
 	AT_command(huart2);
-//	AT_reset(huart2);
-//	AT_command(huart2);
+	AT_reset(huart2);
+	AT_command(huart2);
 	AT_Set_WorkMode(huart2);
 	AT_MultipleConnections(huart2);
-//	AT_Connect_To_WiFi(huart2);
+	AT_Connect_To_WiFi(huart2);
 	AT_Connect_To_Server(huart2);
 	AT_Send(huart2);
 	AT_GET(huart2);

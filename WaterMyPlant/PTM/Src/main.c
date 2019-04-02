@@ -108,7 +108,7 @@ int main(void)
 	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
 
 //	  HAL_UART_Transmit_IT(&huart2, sendUART, sizeSendUART);
-	  if(flag < 9)
+	  if(flag < 5)
 	  {
 		  ConfigESP(&huart2);
 		  flag += 1;
