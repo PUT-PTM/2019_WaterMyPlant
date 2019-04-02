@@ -117,6 +117,13 @@ void AT_GET(UART_HandleTypeDef *huart2)
 		uint16_t sizeSendUART = 150;
 		HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
 		check(19000);
+
+		// DO PRZETESOWANIA
+		uint16_t sizeReceiveUART = 100;
+		uint8_t receiveUART[sizeReceiveUART];
+		HAL_UART_Receive_IT(huart2, receiveUART, sizeReceiveUART);
+		// tutaj musimy zobaczyc co pokaze STM Studio dla
+		// wartosci receive UART
 }
 
 void AT_POST()
