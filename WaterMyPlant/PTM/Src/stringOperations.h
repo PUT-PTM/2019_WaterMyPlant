@@ -16,7 +16,7 @@
 
 // to musi miec Stringa jako parametr
 static boolean canIWaterMyPlant(){
-	if( charsContainsStage() && isStageGTZero )
+	if( charsContainsStage() && isStageGTZero() )
 		return true;
 	else
 		return false;
