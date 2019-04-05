@@ -42,7 +42,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "esp.h"
-#include "stringOperations.h"
+#include "headers/stringOperations.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -62,18 +62,18 @@ static void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	// dodana obsluga przerwania dla UART2
-	if(huart->Instance == USART2){
+//	if(huart->Instance == USART2){
 
-       HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+//       HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
 
        // parametrem tego musi byc receiceUART
-       if ( canIWaterMyPlant() ){
+//       if ( canIWaterMyPlant() ){
     	   // podlej kwiata
-       }
-   }
-}
+//       }
+//   }
+//}
 
 /* USER CODE END PFP */
 
