@@ -9,10 +9,10 @@
 <!ATTLIST board id CDATA #REQUIRED>
 ]>
 <targetDefinitions>
-  <board id="PTM">
-    <name>PTM</name>
-    <dbgIF>SWD</dbgIF>
-    <dbgDEV>ST-Link</dbgDEV>
-    <mcuId>stm32f411vetx</mcuId>
-  </board>
+	<board id="PTM">
+		<name>PTM</name>
+		<dbgIF>SWD</dbgIF>
+		<dbgDEV>ST-Link</dbgDEV>
+		<mcuId>stm32f411vetx</mcuId>
+	</board>
 </targetDefinitions>

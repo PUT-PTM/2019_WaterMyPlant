@@ -63,7 +63,7 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
+volatile int first = 0;
 /* USER CODE END 0 */
 
 /**

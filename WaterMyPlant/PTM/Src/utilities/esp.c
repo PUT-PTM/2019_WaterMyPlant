@@ -1,6 +1,7 @@
 #include "stm32f4xx_hal.h"
 #include "main.h"
-
+#include "esp.h"
+#include "headers/sender.h"
 /*
  * plik do obslugi polecen wysylaych na ESP 8266
  *
@@ -10,21 +11,10 @@
  *  2. Dopisac dzialajaca funkcje //void ConnectToWiFi(UART_HandleTypeDef *huart2, char* ssid, char* pass) po to, zeby podawac rozne WiFi
  */
 
-
 /*
- * Function prototypes
+ * variables
  */
 
-
-void check(uint delay);
-void AT_command(UART_HandleTypeDef *huart2);
-void AT_reset(UART_HandleTypeDef *huart2);
-void AT_Set_WorkMode(UART_HandleTypeDef *huart2);
-void AT_MultipleConnections(UART_HandleTypeDef *huart2);
-void AT_Connect_To_Server(UART_HandleTypeDef *huart2);
-void AT_Connect_To_WiFi(UART_HandleTypeDef *huart2);
-void AT_Send(UART_HandleTypeDef *huart2);
-void AT_GET(UART_HandleTypeDef *huart2);
 
 //configuracja polaczenia esp z serwerem
 void ConfigESP(UART_HandleTypeDef *huart2)
@@ -33,19 +23,23 @@ void ConfigESP(UART_HandleTypeDef *huart2)
 	AT_reset(huart2);
 	AT_command(huart2);
 	AT_Set_WorkMode(huart2);
-	AT_MultipleConnections(huart2);
-	AT_Connect_To_WiFi(huart2);
-	AT_Connect_To_Server(huart2);
-	AT_Send(huart2);
-	AT_GET(huart2);
+//	AT_MultipleConnections(huart2);
+//	AT_Connect_To_WiFi(huart2);
+//	AT_Connect_To_Server(huart2);
+//	AT_Send(huart2);
+//	AT_GET(huart2);
 }
 //sprawdzenie czy polaczono z ESP 8266 AT
 void AT_command(UART_HandleTypeDef *huart2)
 {
-	uint8_t sendUART[40] = {"AT\r\n"};
-	uint16_t sizeSendUART = 40;
-	HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
+//	uint8_t sendUART[4] = {"AT\r\n"};
+//	uint16_t sizeSendUART = 4;
+//	HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
+	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
+	Send_To_ESP(huart2, "AT\r\n", 4);
+	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
 	check(300);
+	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
 }
 //resetowanie esp
 void AT_reset(UART_HandleTypeDef *huart2)
@@ -97,22 +91,23 @@ void AT_Connect_To_WiFi(UART_HandleTypeDef *huart2)
 
 void AT_Send(UART_HandleTypeDef *huart2)
 {
-		uint8_t sendUART[100] = {"AT+CIPSEND=4,129\r\n"};
+		uint8_t sendUART[100] = {"AT+CIPSEND=4,88\r\n"};
 		uint16_t sizeSendUART = 100;
 		HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
 		check(2000);
 }
 void AT_GET(UART_HandleTypeDef *huart2)
 {
-		uint8_t sendUART[150] = {"GET /add_flower.php?flowerName=C0009 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n"};
-		uint16_t sizeSendUART = 150;
+		uint8_t sendUART[90] = {"GET /get_state.php?id=2 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n"};
+		uint16_t sizeSendUART = 90;
 		HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
-		check(19000);
 
+		check(4000);
 		// DO PRZETESOWANIA
 		uint16_t sizeReceiveUART = 100;
-		uint8_t receiveUART[sizeReceiveUART];
+		uint8_t receiveUART[100];
 		HAL_UART_Receive_IT(huart2, receiveUART, sizeReceiveUART);
+		check(1000);
 		// tutaj musimy zobaczyc co pokaze STM Studio dla
 		// wartosci receive UART
 }
