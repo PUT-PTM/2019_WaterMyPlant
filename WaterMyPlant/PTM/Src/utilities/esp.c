@@ -1,6 +1,6 @@
 #include "stm32f4xx_hal.h"
 #include "main.h"
-#include "esp.h"
+#include "headers/esp.h"
 #include "headers/sender.h"
 /*
  * plik do obslugi polecen wysylaych na ESP 8266
@@ -15,13 +15,12 @@
  * variables
  */
 
-
-//configuracja polaczenia esp z serwerem
+//konfiguracja polaczenia esp z serwerem
 void ConfigESP(UART_HandleTypeDef *huart2)
 {
-	AT_command(huart2);
-	AT_reset(huart2);
-	AT_command(huart2);
+//	AT_command(huart2);
+//	AT_reset(huart2);
+//	AT_command(huart2);
 	AT_Set_WorkMode(huart2);
 	AT_MultipleConnections(huart2);
 	AT_Connect_To_WiFi(huart2);
@@ -53,7 +52,10 @@ void AT_Set_WorkMode(UART_HandleTypeDef *huart2)
 	Send_To_ESP(huart2, "AT+CWMODE=1\r\n", 13);
 	check(300);
 }
-//Pozwolenie na wiele polaczen MAX 4
+/*Pozwolenie na wiele polaczen MAX 4
+* 1 - wiele
+* 0 - jedno
+*/
 void AT_MultipleConnections(UART_HandleTypeDef *huart2)
 {
 	Send_To_ESP(huart2, "AT+CIPMUX=1\r\n", 13);
@@ -66,26 +68,25 @@ void AT_Connect_To_Server(UART_HandleTypeDef *huart2)
 	Send_To_ESP(huart2, msg, 72);
 	check(2000);
 }
-
 //trzeba zrobic konkatenacje, zeby moc podawac dowolne parametry ssid i hasla do wifi
 //void ConnectToWiFi(UART_HandleTypeDef *huart2, char* ssid, char* pass)
 void AT_Connect_To_WiFi(UART_HandleTypeDef *huart2)
 {
-		char* msg = "AT+CWJAP=\"iPhone (Błażej)\",\"misiu132\"\r\n";
+		char* msg = "AT+CWJAP=\"krzysiulekk\",\"misio1234\"\r\n";
 		Send_To_ESP(huart2, msg, 44);
 		check(7000);
 }
-
+// ustalenie kanalu i ilosci przesylanych bajtow
 void AT_Send(UART_HandleTypeDef *huart2)
 {
 		Send_To_ESP(huart2, "AT+CIPSEND=4,88\r\n", 18);
 		check(2000);
 }
+//pobranie wartosci z serwera poleceniem GET
 void AT_GET(UART_HandleTypeDef *huart2)
 {
-		uint8_t sendUART[90] = {"GET /get_state.php?id=2 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n"};
-		uint16_t sizeSendUART = 90;
-		HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
+		char* msg = "GET /get_state.php?id=2 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
+		Send_To_ESP(huart2, msg, 90);
 
 		check(4000);
 		// DO PRZETESOWANIA
@@ -96,12 +97,6 @@ void AT_GET(UART_HandleTypeDef *huart2)
 		// tutaj musimy zobaczyc co pokaze STM Studio dla
 		// wartosci receive UART
 }
-
-void AT_POST()
-{
-	//
-}
-
 //zmiana stanu diody na stmie i chwila odczekania
 void check(uint delay)
 {

@@ -41,7 +41,7 @@
 #include "stm32f4xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-#include "esp.h"
+#include "headers/esp.h"
 #include "headers/stringOperations.h"
 /* USER CODE END Includes */
 
@@ -62,18 +62,44 @@ static void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	// dodana obsluga przerwania dla UART2
-//	if(huart->Instance == USART2){
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+//	 dodana obsluga przerwania dla UART2
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+			HAL_Delay(200);
 
-//       HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+	if(huart->Instance == USART2){
 
-       // parametrem tego musi byc receiceUART
-//       if ( canIWaterMyPlant() ){
-    	   // podlej kwiata
-//       }
-//   }
-//}
+       HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+
+       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+       	   	   HAL_Delay(200);
+//        parametrem tego musi byc receiceUART
+       if ( canIWaterMyPlant(receiveUART) == 0)
+       {
+    	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+    	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+    	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+    	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+       }
+
+       if ( canIWaterMyPlant(receiveUART) == 1)
+       {
+    	   for(int i = 0 ; i < 5; i++)
+    	   {
+    		   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+    		      	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+    		      	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+    		      	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+			   HAL_Delay(199);
+    	   }
+       }
+   }
+}
 
 /* USER CODE END PFP */
 
@@ -122,17 +148,9 @@ int main(void)
 	  HAL_Delay(1000);
 	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
 
-//	  HAL_UART_Transmit_IT(&huart2, sendUART, sizeSendUART);
-	  if(flag < 5)
-	  {
 		  ConfigESP(&huart2);
-		  flag += 1;
 		  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-	  }
-//	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-//	  ConfigESP(&huart2);
-//	  HAL_Delay(2000);
-//	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+
 
   /* USER CODE END WHILE */
 

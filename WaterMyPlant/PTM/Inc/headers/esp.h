@@ -8,6 +8,10 @@
 #ifndef ESP_H_
 #define ESP_H_
 
+/*
+ * functions prototypes
+ */
+
 
 void check(uint delay);
 void AT_command(UART_HandleTypeDef *huart2);

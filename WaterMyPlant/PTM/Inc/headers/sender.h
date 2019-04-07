@@ -12,12 +12,9 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
-void Send_To_ESP(UART_HandleTypeDef *huart2, char *msg, uint16_t sizeSendUART)
+void Send_To_ESP(UART_HandleTypeDef *huart2, char* msg, uint16_t sizeSendUART)
 {
-	uint8_t sendUART[sizeSendUART];
-	memset( sendUART, msg, sizeSendUART*sizeof(uint8_t) );
-
-	HAL_UART_Transmit_IT(huart2, sendUART, sizeSendUART);
+	HAL_UART_Transmit_IT(huart2, msg, sizeSendUART);
 }
 
 
