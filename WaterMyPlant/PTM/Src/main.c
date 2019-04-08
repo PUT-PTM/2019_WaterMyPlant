@@ -142,11 +142,10 @@ int main(void)
 	  HAL_Delay(1000);
 
 	  ConfigESP(&huart2);
-//	  HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
 
-//	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-
-
+	  if ( flowerService(canWater) == 1 ){
+		  canWater = 0;
+	  }
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
