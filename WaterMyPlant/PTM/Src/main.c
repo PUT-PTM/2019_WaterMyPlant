@@ -66,11 +66,32 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART2){
 	       // tutaj umieszczamy kod wykonywany po otrzymaniu bajtu
-			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,0);
-			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
-//			HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+			if (receiveUART[0] == receiveUART[1]){
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,0);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
+				HAL_Delay(100);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,0);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,0);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+				HAL_Delay(100);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,0);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
+			}
+
+			else{
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+			}
+
+
+			HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
 	   }
 
 }
@@ -114,7 +135,7 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
   /* USER CODE END 2 */
 
   /* Infinite loop */
