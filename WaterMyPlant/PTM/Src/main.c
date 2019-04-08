@@ -46,53 +46,49 @@
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t receiveUART[2];
-uint16_t sizeReceiveUART = 2;
+uint8_t receiveUART[20];
+uint16_t sizeReceiveUART = 20;
+uint16_t canWater = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_USART1_UART_Init(void);
 static void MX_NVIC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if(huart->Instance == USART2){
+//	if(huart->Instance == USART1){
 	       // tutaj umieszczamy kod wykonywany po otrzymaniu bajtu
-			if (receiveUART[0] == receiveUART[1]){
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,0);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
-				HAL_Delay(100);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,0);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,0);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
-				HAL_Delay(100);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,0);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
+			if (receiveUART[0] == 'P' && receiveUART[19] == 'P'){
+				HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
+				// w tym miejscu sprawdzamy czy otrzymalismy mozliwosc podlania
+				// jesli jest PPPPPPPPPPPPP(...) czyli mozemy podlac
+				// w tym miejscu musimy ustawic flage, ze mamy podlac i
+				// i wyslac do serwera inforamcje o tym, zeby zresetowal stan kwiata
+				canWater++;
+
 			}
 
 			else{
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
-				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
+//				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+//				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+//				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
+//				HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
 			}
 
 
-			HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
-	   }
+			HAL_UART_Receive_IT(&huart1, receiveUART, sizeReceiveUART);
+//	   }
 
 }
 
@@ -131,11 +127,12 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_USART1_UART_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+  HAL_UART_Receive_IT(&huart1, receiveUART, sizeReceiveUART);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -145,6 +142,7 @@ int main(void)
 	  HAL_Delay(1000);
 
 	  ConfigESP(&huart2);
+//	  HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
 
 //	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 
@@ -226,6 +224,25 @@ static void MX_NVIC_Init(void)
   HAL_NVIC_EnableIRQ(USART2_IRQn);
 }
 
+/* USART1 init function */
+static void MX_USART1_UART_Init(void)
+{
+
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+}
+
 /* USART2 init function */
 static void MX_USART2_UART_Init(void)
 {
@@ -260,6 +277,7 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);

@@ -59,13 +59,13 @@ void AT_Set_WorkMode(UART_HandleTypeDef *huart2)
 void AT_MultipleConnections(UART_HandleTypeDef *huart2)
 {
 	Send_To_ESP(huart2, "AT+CIPMUX=1\r\n", 13);
-	check(300);
+	check(2000);
 }
 //kanal, protokol, adres, port
 void AT_Connect_To_Server(UART_HandleTypeDef *huart2)
 {
-	char* msg = "AT+CIPSTART=4,\"TCP\",\"krzysztof.r.czarnecki.student.put.poznan.pl\",80\r\n";
-	Send_To_ESP(huart2, msg, 72);
+	char* msg = "AT+CIPSTART=0,\"TCP\",\"krzysztof.r.czarnecki.student.put.poznan.pl\",80\r\n";
+	Send_To_ESP(huart2, msg, 70);
 	check(2000);
 }
 //trzeba zrobic konkatenacje, zeby moc podawac dowolne parametry ssid i hasla do wifi
@@ -79,13 +79,13 @@ void AT_Connect_To_WiFi(UART_HandleTypeDef *huart2)
 // ustalenie kanalu i ilosci przesylanych bajtow
 void AT_Send(UART_HandleTypeDef *huart2)
 {
-		Send_To_ESP(huart2, "AT+CIPSEND=4,88\r\n", 18);
+		Send_To_ESP(huart2, "AT+CIPSEND=0,88\r\n", 18);
 		check(2000);
 }
 //pobranie wartosci z serwera poleceniem GET
 void AT_GET(UART_HandleTypeDef *huart2)
 {
-		char* msg = "GET /get_state.php?id=2 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
+		char* msg = "GET /get_state.php?id=1 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
 		Send_To_ESP(huart2, msg, 90);
 		check(4000);
 		uint8_t receiveUART[201];
