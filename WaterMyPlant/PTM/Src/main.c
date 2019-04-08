@@ -50,61 +50,35 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t receiveUART[500];
-uint16_t sizeReceiveUART = 500;
-
+uint8_t receiveUART[2];
+uint16_t sizeReceiveUART = 2;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_NVIC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-//	 dodana obsluga przerwania dla UART2
-			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
-			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
-			HAL_Delay(200);
-
 	if(huart->Instance == USART2){
+	       // tutaj umieszczamy kod wykonywany po otrzymaniu bajtu
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,0);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
+//			HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+	   }
 
-       HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
-
-       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
-       	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
-       	   	   HAL_Delay(200);
-//        parametrem tego musi byc receiceUART
-       if ( canIWaterMyPlant(receiveUART) == 0)
-       {
-    	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-    	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-    	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
-    	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
-       }
-
-       if ( canIWaterMyPlant(receiveUART) == 1)
-       {
-    	   for(int i = 0 ; i < 5; i++)
-    	   {
-    		   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15,1);
-    		      	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12,1);
-    		      	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14,1);
-    		      	         	   	   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
-			   HAL_Delay(199);
-    	   }
-       }
-   }
 }
 
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-volatile int first = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -115,7 +89,6 @@ volatile int first = 0;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	int flag = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -137,6 +110,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -146,10 +122,10 @@ int main(void)
   while (1)
   {
 	  HAL_Delay(1000);
-	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
 
-		  ConfigESP(&huart2);
-		  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+	  ConfigESP(&huart2);
+
+//	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 
 
   /* USER CODE END WHILE */
@@ -216,6 +192,17 @@ void SystemClock_Config(void)
 
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* USART2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART2_IRQn);
 }
 
 /* USART2 init function */

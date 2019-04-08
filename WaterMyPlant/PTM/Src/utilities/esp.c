@@ -18,7 +18,7 @@
 //konfiguracja polaczenia esp z serwerem
 void ConfigESP(UART_HandleTypeDef *huart2)
 {
-//	AT_command(huart2);
+	AT_command(huart2);
 //	AT_reset(huart2);
 //	AT_command(huart2);
 	AT_Set_WorkMode(huart2);
@@ -73,7 +73,7 @@ void AT_Connect_To_Server(UART_HandleTypeDef *huart2)
 void AT_Connect_To_WiFi(UART_HandleTypeDef *huart2)
 {
 		char* msg = "AT+CWJAP=\"krzysiulekk\",\"misio1234\"\r\n";
-		Send_To_ESP(huart2, msg, 44);
+		Send_To_ESP(huart2, msg, 46);
 		check(7000);
 }
 // ustalenie kanalu i ilosci przesylanych bajtow
@@ -87,19 +87,14 @@ void AT_GET(UART_HandleTypeDef *huart2)
 {
 		char* msg = "GET /get_state.php?id=2 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
 		Send_To_ESP(huart2, msg, 90);
-
 		check(4000);
-		// DO PRZETESOWANIA
-		uint16_t sizeReceiveUART = 100;
-		uint8_t receiveUART[100];
-		HAL_UART_Receive_IT(huart2, receiveUART, sizeReceiveUART);
-		check(1000);
-		// tutaj musimy zobaczyc co pokaze STM Studio dla
-		// wartosci receive UART
+		uint8_t receiveUART[201];
+		uint16_t sizeReceiveUART = 201;
+		  HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
 }
 //zmiana stanu diody na stmie i chwila odczekania
 void check(uint delay)
 {
 	HAL_Delay(delay);
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
+//	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
 }
