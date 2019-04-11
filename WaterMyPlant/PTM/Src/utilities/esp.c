@@ -15,6 +15,15 @@
  * variables
  */
 
+void sendResetFlowerState(UART_HandleTypeDef *huart2){
+	AT_Set_WorkMode(huart2);
+	AT_MultipleConnections(huart2);
+	AT_Connect_To_WiFi(huart2);
+	AT_Connect_To_Server(huart2);
+	AT_Send(huart2);
+
+}
+
 //konfiguracja polaczenia esp z serwerem
 void ConfigESP(UART_HandleTypeDef *huart2)
 {
@@ -27,6 +36,7 @@ void ConfigESP(UART_HandleTypeDef *huart2)
 	AT_Connect_To_Server(huart2);
 	AT_Send(huart2);
 	AT_GET(huart2);
+	AT_GET_ResetFlowerState(huart2);
 }
 //sprawdzenie czy polaczono z ESP 8266 AT
 void AT_command(UART_HandleTypeDef *huart2)
@@ -90,7 +100,15 @@ void AT_GET(UART_HandleTypeDef *huart2)
 		check(4000);
 		uint8_t receiveUART[201];
 		uint16_t sizeReceiveUART = 201;
-		  HAL_UART_Receive_IT(&huart2, receiveUART, sizeReceiveUART);
+}
+
+void AT_GET_ResetFlowerState(UART_HandleTypeDef *huart2)
+{
+		char* msg = "GET /get_state.php?id=1 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
+		Send_To_ESP(huart2, msg, 90);
+		check(4000);
+		uint8_t receiveUART[201];
+		uint16_t sizeReceiveUART = 201;
 }
 //zmiana stanu diody na stmie i chwila odczekania
 void check(uint delay)
