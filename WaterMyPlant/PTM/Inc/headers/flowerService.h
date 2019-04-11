@@ -11,7 +11,13 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
-void(uint16_t canWater);
+uint16_t flowerService(uint16_t canWater);
+void waterMyPlant();
+uint16_t measureHumidity();
+void turnPumpOn();
+void turnLedsOn();
+void turnPumpOff();
+void turnLedsOff();
 
 
 

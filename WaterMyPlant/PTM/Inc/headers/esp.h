@@ -22,6 +22,7 @@ void AT_Connect_To_Server(UART_HandleTypeDef *huart2);
 void AT_Connect_To_WiFi(UART_HandleTypeDef *huart2);
 void AT_Send(UART_HandleTypeDef *huart2);
 void AT_GET(UART_HandleTypeDef *huart2);
+void AT_GET_ResetFlowerState(UART_HandleTypeDef *huart2);
 
 
 
