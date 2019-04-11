@@ -11,6 +11,8 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
+void(uint16_t canWater);
+
 
 
 #endif /* HEADERS_FLOWERSERVICE_H_ */

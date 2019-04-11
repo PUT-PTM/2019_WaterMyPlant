@@ -70,7 +70,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 //	if(huart->Instance == USART1){
 	       // tutaj umieszczamy kod wykonywany po otrzymaniu bajtu
 			if (receiveUART[0] == 'P' && receiveUART[19] == 'P'){
-				HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
 				// w tym miejscu sprawdzamy czy otrzymalismy mozliwosc podlania
 				// jesli jest PPPPPPPPPPPPP(...) czyli mozemy podlac
 				// w tym miejscu musimy ustawic flage, ze mamy podlac i
