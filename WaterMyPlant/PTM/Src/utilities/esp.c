@@ -103,8 +103,8 @@ void AT_GET(UART_HandleTypeDef *huart2)
 
 void AT_GET_ResetFlowerState(UART_HandleTypeDef *huart2)
 {
-		char* msg = "GET /get_state.php?id=1 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
-		Send_To_ESP(huart2, msg, 90);
+		char* msg = "GET /reset_flower.php?id=1 HTTP/1.1\r\nHost:krzysztof.r.czarnecki.student.put.poznan.pl\r\n\r\n\r\n\r\n";
+		Send_To_ESP(huart2, msg, 93);
 		check(4000);
 		uint8_t receiveUART[201];
 		uint16_t sizeReceiveUART = 201;
