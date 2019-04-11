@@ -133,7 +133,7 @@ int main(void)
 		  canWater = 0;
 
 		  for(int i = 0; i < 5; i++){
-			  sendResetFlowerState(&huart2);
+			  SendResetFlowerState(&huart2);
 		  }
 	  }
   /* USER CODE END WHILE */
