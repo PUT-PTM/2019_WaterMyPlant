@@ -4,6 +4,11 @@
  *  Created on: Apr 8, 2019
  *      Author: Blaise
  */
+
+#include "main.h"
+#include "stm32f4xx_hal.h"
+#include "headers/flowerService.h"
+
 uint16_t flowerService(uint16_t canWater){
 	// 1. canWater <= 0 -> nie można podlac
 	if ( canWater <= 0){
@@ -47,25 +52,30 @@ void waterMyPlant(){
 	// ESP_Send_Get_Reset_floweState(); -> to ma byc nawet, jezeli tylko wlaczylo ledy. Najlepiej z 5 razy dla pewnosci
 }
 
-
-uint16_t measureHumidity(){
-	// funkcja do pomiaru wilgotnosci
-	return ;
+// funkcja do pomiaru wilgotnosci
+uint16_t measureHumidity()
+{
+	uint16_t r = 10;
+	return r;
 }
 
-void turnPumpOn(){
+void turnPumpOn()
+{
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 1); // docelowo ma tu byc pin wlaczajacy pompke
 }
 
-void turnLedsOn(){
+void turnLedsOn()
+{
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 1); // docelowo ma tu byc pin wlaczajacy pompke
 }
 
-void turnPumpOff(){
+void turnPumpOff()
+{
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 0); // docelowo ma tu byc pin wlaczajacy pompke
 }
 
-void turnLedsOff(){
+void turnLedsOff()
+{
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 0); // docelowo ma tu byc pin wlaczajacy pompke
 }
 
