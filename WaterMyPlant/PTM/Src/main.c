@@ -131,6 +131,10 @@ int main(void)
 
 	  if ( flowerService(canWater) == 1 ){
 		  canWater = 0;
+
+		  for(int i = 0; i < 5; i++){
+			  sendResetFlowerState(&huart2);
+		  }
 	  }
   /* USER CODE END WHILE */
 

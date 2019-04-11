@@ -46,10 +46,6 @@ void waterMyPlant(){
 		 turnPumpOff();
 		 turnLedsOff();
 	 }
-
-
-
-	// ESP_Send_Get_Reset_floweState(); -> to ma byc nawet, jezeli tylko wlaczylo ledy. Najlepiej z 5 razy dla pewnosci
 }
 
 // funkcja do pomiaru wilgotnosci
