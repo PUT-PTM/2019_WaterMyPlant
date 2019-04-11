@@ -70,6 +70,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 //	if(huart->Instance == USART1){
 	       // tutaj umieszczamy kod wykonywany po otrzymaniu bajtu
 			if (receiveUART[0] == 'P' && receiveUART[19] == 'P'){
+				// w tym miejscu sprawdzamy czy otrzymalismy mozliwosc podlania
+				// jesli jest PPPPPPPPPPPPP(...) czyli mozemy podlac
+				// w tym miejscu musimy ustawic flage, ze mamy podlac i
+				// i wyslac do serwera inforamcje o tym, zeby zresetowal stan kwiata
 				canWater++;
 			}
 			HAL_UART_Receive_IT(&huart1, receiveUART, sizeReceiveUART);
