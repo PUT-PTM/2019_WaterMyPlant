@@ -36,7 +36,7 @@
   ======================================================= -->
 </head>
 
-<body>
+<body onload="addPoint()">
 
   <header id="header" class="header header-hide">
     <div class="container">
@@ -58,10 +58,10 @@
   <section id="hero" class="wow fadeIn">
     <div class="hero-container">
       <h1>Welcome to Kris Plant</h1>
-      <h2>Points: 123/300</h2>
+      <h2>Points: <z id ="flowerPoints1">123</z>/300</h2>
       <h2>Last watering: 12.04.2019r 15:17</h2>
       <img src="img/hero-img.png" alt="Hero Imgs">
-      <a class="btn-get-started scrollto" onclick="addPoint()" name="addPoint">Add point</a>
+      <a id = "addPoint" class="btn-get-started scrollto" onclick="addPoint()" name="addPoint">Add point</a>
       <div class="btns">
         <a href="#"><i class="fa fa-apple fa-3x"></i> App Store</a>
         <a href="#"><i class="fa fa-play fa-3x"></i> Google Play</a>
@@ -84,7 +84,7 @@
         <h6>Air Humidity: 33%</h6>
         <h6>Temperature: 12C</h6>
         <h6>Last watering: 12.04.2019r 15:17</h6>
-        <h6>Points: 123/300</h6>
+        <h6>Points: <z id ="flowerPoints2">123</z>/300</h6>
           
 
       </div>
@@ -157,14 +157,29 @@
 
 <script>
     function addPoint() {
-      $.ajax({
+                
+        $.ajax({
            type: "GET",
            url: 'http://krzysztof.r.czarnecki.student.put.poznan.pl/waterMyPlant/increment_flower.php?id=1',
            data:{action:'addPoint'},
            success:function(html) {
 //             alert(html);
-           }
+           }});
+        
+        const $list = $('.user-list');
+//wykonujemy połączenie
+    $.ajax({
+        url : 'http://krzysztof.r.czarnecki.student.put.poznan.pl/get_flower.php?id=1',
+        dataType : 'json'
+    })
+    .done((res) => {
+        res.forEach(el => {
+            console.log(el.flowerState);
+            document.getElementById("flowerPoints1").innerHTML = el.flowerState;
+            document.getElementById("flowerPoints2").innerHTML = el.flowerState;
+        })
+    })
+    .always(() => {});
 
-      });
  }
 </script>
