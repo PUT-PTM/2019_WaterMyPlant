@@ -42,7 +42,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="#body" class="scrollto">Water<span>My</span>Plant</a></h1>
+        <h1><a href="#body" class="scrollto">Water<span>Kris</span>Plant</a></h1>
       </div>
 
       <nav id="nav-menu-container">
@@ -166,7 +166,24 @@
 //             alert(html);
            }});
         
-        // chodziło mi o to.
+        // chodziło mi o to. - pobieranie flowerState
+        const $list = $('.I_dont_know_why_is_this_here_but_it_have_to_be');
+            //wykonujemy połączenie
+        $.ajax({
+            url : 'http://krzysztof.r.czarnecki.student.put.poznan.pl/get_flower.php?id=1',
+            dataType : 'json'
+        })
+        .done((res) => {
+            res.forEach(el => {
+            console.log(el.flowerState);
+            document.getElementById("flowerPoints1").innerHTML = el.flowerState;
+            document.getElementById("flowerPoints2").innerHTML = el.flowerState;
+            })
+        })
+        .always(() => {});
+        // dotąd.
+        
+        // pobieranie statystyk
         const $list = $('.I_dont_know_why_is_this_here_but_it_have_to_be');
             //wykonujemy połączenie
         $.ajax({
