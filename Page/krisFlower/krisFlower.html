@@ -43,8 +43,6 @@
 
       <div id="logo" class="pull-left">
         <h1><a href="#body" class="scrollto">Water<span>My</span>Plant</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
       </div>
 
       <nav id="nav-menu-container">
@@ -63,7 +61,7 @@
       <h2>Points: 123/300</h2>
       <h2>Last watering: 12.04.2019r 15:17</h2>
       <img src="img/hero-img.png" alt="Hero Imgs">
-      <a class="btn-get-started scrollto">Add point</a>
+      <a class="btn-get-started scrollto" onclick="addPoint()" name="addPoint">Add point</a>
       <div class="btns">
         <a href="#"><i class="fa fa-apple fa-3x"></i> App Store</a>
         <a href="#"><i class="fa fa-play fa-3x"></i> Google Play</a>
@@ -156,3 +154,17 @@
 
 </body>
 </html>
+
+<script>
+    function addPoint() {
+      $.ajax({
+           type: "GET",
+           url: 'http://krzysztof.r.czarnecki.student.put.poznan.pl/waterMyPlant/increment_flower.php?id=1',
+           data:{action:'addPoint'},
+           success:function(html) {
+//             alert(html);
+           }
+
+      });
+ }
+</script>
