@@ -55,7 +55,7 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav nav-items-center ml-auto mr-auto" >
+				<ul class="navbar-nav nav-items-center ml-auto mr-auto">
 					<li class="nav-item active">
 						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 					</li>
@@ -69,7 +69,7 @@
 						<a class="nav-link" href="#"  onclick="$('#fh5co-download').goTo();return false;">Download</a>
 					</li>
                     <li class="nav-item">
-						<a class="nav-link" href="#" onclick="myAjax()" name="someAction">TestBtn</a>
+						<a class="nav-link" href="#"  name="someAction">TestBtn</a>
 					</li>
 				</ul>
 				<div class="social-icons-header">
@@ -83,7 +83,7 @@
 		<div class="container fh5co-hero-inner">
 			<h1 class="animated fadeIn wow" data-wow-delay="0.4s">Let Your Plant Be Watered.</h1>
 			<p class="animated fadeIn wow" data-wow-delay="0.67s">It's service to plant your water far away from home.</p>
-			<button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s" onclick="$('#fh5co-features').goTo();return false;">Start Watering</button>
+			<button class="btn btn-md download-btn-first wow fadeInLeft animated" data-wow-delay="0.85s" onclick="$('#fh5co-download').goTo();return false;">Water Plants</button>
 			<button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s" onclick="$('#fh5co-features').goTo();return false;">About</button>
 			<img class="fh5co-hero-smartphone animated fadeInRight wow" data-wow-delay="1s" src="img/phone-image.png" alt="Smartphone">
 		</div>
@@ -106,25 +106,49 @@
 				<div class="col-sm-4">
 					<img class="grid-image" src="img/icon-1.png" alt="Icon-1">
 					<h1 class="grid-title">Usability</h1>
-					<p class="grid-desc">You can take care about your flower wherever you are. Even if it's next to you.</p>
+					<p class="grid-desc">You can take care about your flower wherever you are.</p>
 				</div>
 
 				<div class="col-sm-4">
 					<img class="grid-image" src="img/icon-2.png" alt="Icon-2">
 					<h1 class="grid-title">Simplicity</h1>
-					<p class="grid-desc">Press the button hundred times to water your plant just once.</p>
+					<p class="grid-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cupiditate.</p>
 				</div>
 
 				<div class="col-sm-4">
 					<img class="grid-image" src="img/icon-3.png" alt="Icon-3">
 					<h1 class="grid-title">Unlimited Flowers</h1>
-					<p class="grid-desc">But no more than two.</p>
+					<p class="grid-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem cupiditate.</p>
 				</div>
 
 
 			</div>
 		</div>
 	</div>
+
+
+	<!-- ==========================================================================================================
+													  SLIDER
+		 ========================================================================================================== -->
+
+	<div class="fh5co-slider-outer wow fadeIn" data-wow-delay="0.36s">
+		<h1>SIMPLE WIDGETS</h1>
+		<small>Drag and Drop</small>
+		<div class="container fh5co-slider-inner">
+
+			<div class="owl-carousel owl-theme">
+
+				<div class="item"><img src="img/smartphone-2.png" alt=""></div>
+				<div class="item"><img src="img/smartphone-2.png" alt=""></div>
+				<div class="item"><img src="img/iphone.png" alt=""></div>
+				<div class="item"><img src="img/smartphone-2.png" alt=""></div>
+
+
+			</div>
+
+		</div>
+	</div>
+
 
 	<!-- ==========================================================================================================
 													  FEATURES
@@ -145,16 +169,16 @@
 				</div>
 
 				<div class="col-sm-6 in-order-2 sm-6-content wow animated fadeInRight" data-wow-delay="0.22s">
-					<h1 href="/blaisePlant.html" class="flowerBtn">Blaise Plant</h1>
-					<p>The most powerful rose in Poznan City.</p>
+					<h1>New Features</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolor iste beatae ad adipisci, fugiat dignissimos pariatur, dolore nemo suscipit cum nisi earum voluptates nulla! </p>
 					<span class="circle circle-first"><i class="fab fa-instagram"></i></span>
 					<span class="circle circle-middle"><i class="fab fa-facebook"></i></span>
 					<span class="circle circle-last"><i class="fab fa-twitter"></i></span>
 				</div>
 
 				<div class="col-sm-6 in-order-3 sm-6-content wow animated fadeInLeft" data-wow-delay="0.22s">
-					<h1 href="/krisFlower.html" class="flowerBtn">Kris Plant</h1>
-					<p>Just perfect for first time </p>
+					<h1>REAL-TIME STATISTICS</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolor iste beatae ad adipisci, fugiat dignissimos pariatur, dolore nemo suscipit cum nisi earum voluptates nulla! </p>
 					<span class="circle circle-first"><i class="fas fa-star"></i></span>
 					<span class="circle circle-middle"><i class="far fa-star"></i></span>
 					<span class="circle circle-last"><i class="far fa-thumbs-up"></i></span>
@@ -163,6 +187,26 @@
 				<div class="col-sm-6 in-order-4 wow animated fadeInRight" data-wow-delay="0.22s">
 					<img class="img-float-right" src="img/smartphone-2.png" alt="smartphone-2">
 				</div>
+
+				<div class="col-sm-6 in-order-5 wow animated fadeInLeft" data-wow-delay="0.22s">
+					<div class="col-sm-image-container">
+						<img class="img-float-left" src="img/smartphone-2.png" alt="smartphone-3">
+						<span class="span-data">DATA</span>
+						<span class="span-percent">100%</span>
+					</div>
+				</div>
+				<div class="col-sm-6 in-order-6 sm-6-content wow animated fadeInRight" data-wow-delay="0.22s">
+					<h1>POWERFUL BACKEND</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolor iste beatae ad adipisci, fugiat dignissimos pariatur, dolore nemo suscipit cum nisi earum voluptates nulla! </p>
+					<span class="circle circle-first">95%</span>
+					<span class="circle circle-middle"><i class="fas fa-forward"></i></span>
+					<span class="circle circle-last"><i class="fab fa-github"></i></span>
+
+				</div>
+
+
+
+
 			</div> <!-- row -->
 
 
@@ -181,14 +225,14 @@
 			<div class="row justify-content-center">
 				<div class="col-sm-5 wow fadeIn animated" data-wow-delay="0.25s">
 					<img class="float-left" src="img/quotes-1.jpg" alt="Quote 1">
-					<p class="testimonial-desc">I was bored with using normal waterpot. Now I can Water My Plant without leaving my computer. It's awesome!</p>
-					<small class="testimonial-author">Krzysztof Czarnecki</small>
+					<p class="testimonial-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis similique quasi.</p>
+					<small class="testimonial-author">John Doe</small>
 					<img class="float-right" src="img/quotes-2.jpg" alt="Quote 2">
 				</div>
 				<div class="col-sm-5 testimonial-2 wow fadeIn animated" data-wow-delay="0.67s">
 					<img class="float-left" src="img/quotes-1.jpg" alt="Quote 1">
-					<p class="testimonial-desc">This invention changed my life. Nowadays it's important take control over plants wherever I want.</p>
-					<small class="testimonial-author">Błażej Czekała</small>
+					<p class="testimonial-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis similique quasi.</p>
+					<small class="testimonial-author">Someone</small>
 					<img class="float-right" src="img/quotes-2.jpg" alt="Quote 2">
 				</div>
 			</div>
@@ -207,9 +251,9 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h1>How to download the app?</h1>
-						<p>We don't have any special app, but you can start watering our plants here. </p>
-<!--						<a class="wow fadeIn animated" data-wow-delay="0.25s" href="#"><img class="app-store-btn" src="img/app-store-icon.png" alt="App Store Icon"></a>-->
-<!--						<a class="wow fadeIn animated" data-wow-delay="0.67s" href="#"><img class="google-play-btn" src="img/google-play-icon.png" alt="Google Play Icon"></a>-->
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque suscipit, similique animi saepe, ipsam itaque, tempore minus maxime pariatur error unde fugit tenetur.</p>
+						<a class="wow fadeIn animated" data-wow-delay="0.25s" href="#"><img class="app-store-btn" src="img/app-store-icon.png" alt="App Store Icon"></a>
+						<a class="wow fadeIn animated" data-wow-delay="0.67s" href="#"><img class="google-play-btn" src="img/google-play-icon.png" alt="Google Play Icon"></a>
 					</div>
 				</div>
 			</div>
@@ -267,16 +311,21 @@
 </body>
 </html>
 
-<script>
-    function myAjax() {
-      $.ajax({
-           type: "GET",
-           url: 'http://krzysztof.r.czarnecki.student.put.poznan.pl/waterMyPlant/reset_flower2.php',
-           data:{action:'call_this'},
-           success:function(html) {
-//             alert(html);
-           }
 
-      });
- }
-</script>
+<?php
+if($_GET){
+    if(isset($_GET['someAction'])){
+        insert();
+    }
+}
+
+    function select()
+    {
+       echo "The select function is called.";
+    }
+    function insert()
+    {
+       echo "The insert function is called.";
+    }
+
+?>
