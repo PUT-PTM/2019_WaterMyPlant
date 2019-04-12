@@ -166,20 +166,22 @@
 //             alert(html);
            }});
         
-        const $list = $('.user-list');
-//wykonujemy połączenie
-    $.ajax({
-        url : 'http://krzysztof.r.czarnecki.student.put.poznan.pl/get_flower.php?id=1',
-        dataType : 'json'
-    })
-    .done((res) => {
-        res.forEach(el => {
+        // chodziło mi o to.
+        const $list = $('I dont know why is this here, but it have to be.');
+            //wykonujemy połączenie
+        $.ajax({
+            url : 'http://krzysztof.r.czarnecki.student.put.poznan.pl/get_flower.php?id=1',
+            dataType : 'json'
+        })
+        .done((res) => {
+            res.forEach(el => {
             console.log(el.flowerState);
             document.getElementById("flowerPoints1").innerHTML = el.flowerState;
             document.getElementById("flowerPoints2").innerHTML = el.flowerState;
+            })
         })
-    })
-    .always(() => {});
+        .always(() => {});
+        // dotąd.
 
  }
 </script>
