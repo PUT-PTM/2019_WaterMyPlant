@@ -132,7 +132,8 @@ int main(void)
 	  if ( flowerService(canWater) == 1 ){
 		  canWater = 0;
 
-		  for(int i = 0; i < 5; i++){
+		  // reset bedzie robiony tylko raz dlatego, ze /reset_flower odejmuje nam wartosc o -(jednostka dla kwiata na jedno podlanie)
+		  for(int i = 0; i < 1; i++){
 			  SendResetFlowerState(&huart2);
 		  }
 	  }
