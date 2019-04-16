@@ -624,7 +624,9 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  margin-left: auto;
 }
+
 
 .col {
   -ms-flex-preferred-size: 0;
@@ -3926,7 +3928,7 @@ input[type="button"].btn-block {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 3rem 1rem;
 }
 
 .navbar > .container,
