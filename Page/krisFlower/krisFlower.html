@@ -36,7 +36,7 @@
   ======================================================= -->
 </head>
 
-<body onload="updatePoints()">
+<body onload="checkEvery()">
 
   <header id="header" class="header header-hide">
     <div class="container">
@@ -167,6 +167,9 @@
            }});
         updatePoints();
  }
+    function checkEvery(){
+        setInterval(updatePoints, 5000);
+    }
     
     function updatePoints(){
                 // chodziło mi o to. - pobieranie flowerState
