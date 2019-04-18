@@ -8,6 +8,10 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "headers/flowerService.h"
+/*
+ * Global variables
+ */
+uint16_t humidity = 0;
 
 uint16_t flowerService(uint16_t canWater){
 	// 1. canWater <= 0 -> nie można podlac
@@ -22,15 +26,15 @@ uint16_t flowerService(uint16_t canWater){
 }
 
 void waterMyPlant(){
-	uint16_t minHumidity = 25;
-	uint16_t maxHumidity = 55;
+	uint16_t minHumidity = 500;
+	uint16_t maxHumidity = 2000;
 	uint16_t measuredHumidity = measureHumidity();
 
 
 	 if ( measuredHumidity < maxHumidity  && measuredHumidity > minHumidity ){
 		 turnPumpOn();
 		 turnLedsOn();
-		 HAL_Delay(1000);
+		 HAL_Delay(3000);
 		 turnPumpOff();
 		 turnLedsOff();
 	 }
@@ -42,17 +46,21 @@ void waterMyPlant(){
 	 else if (measuredHumidity < minHumidity){
 		 turnPumpOn();
 		 turnLedsOn();
-		 HAL_Delay(5000); // czas podlewania jest dluzszy jesli wilgotnosc jest ponizej wartosci zadanej
+		 HAL_Delay(6000); // czas podlewania jest dluzszy jesli wilgotnosc jest ponizej wartosci zadanej
 		 turnPumpOff();
 		 turnLedsOff();
 	 }
 }
 
+void setHumidity(uint16_t hum)
+{
+	humidity = hum;
+}
+
 // funkcja do pomiaru wilgotnosci
 uint16_t measureHumidity()
 {
-	uint16_t r = 10;
-	return r;
+	return humidity;
 }
 
 void turnPumpOn()

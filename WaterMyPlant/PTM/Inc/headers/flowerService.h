@@ -15,6 +15,7 @@ void turnPumpOn();
 void turnLedsOn();
 void turnPumpOff();
 void turnLedsOff();
+void setHumidity(uint16_t hum);
 
 
 
