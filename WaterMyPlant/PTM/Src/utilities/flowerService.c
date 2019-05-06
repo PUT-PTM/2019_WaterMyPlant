@@ -33,19 +33,19 @@ void waterMyPlant(){
 
 	 if ( measuredHumidity < maxHumidity  && measuredHumidity > minHumidity ){
 		 turnPumpOn();
-		 turnLedsOn();
+		 turnLedsOn(1);
 		 HAL_Delay(3000);
 		 turnPumpOff();
 		 turnLedsOff();
 	 }
 	 else if (measuredHumidity > maxHumidity){
-		 turnLedsOn();
+		 turnLedsOn(3);
 		 HAL_Delay(1000);
 		 turnLedsOff();
 	 }
 	 else if (measuredHumidity < minHumidity){
 		 turnPumpOn();
-		 turnLedsOn();
+		 turnLedsOn(2);
 		 HAL_Delay(6000); // czas podlewania jest dluzszy jesli wilgotnosc jest ponizej wartosci zadanej
 		 turnPumpOff();
 		 turnLedsOff();
@@ -65,21 +65,51 @@ uint16_t measureHumidity()
 
 void turnPumpOn()
 {
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 1); // docelowo ma tu byc pin wlaczajacy pompke
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 1); // docelowo ma tu byc pin wlaczajacy pompke
 }
-
-void turnLedsOn()
+/*
+ * 1 - zielona dioda - stan normalny - zwykle podlewanie
+ * 2 - zolta dioda - podlewanie awaryjne, gdy jest za malo wody w doniczce
+ * 3 - czerwona dioda -
+ */
+void turnLedsOn(int num)
 {
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 1); // docelowo ma tu byc pin wlaczajacy pompke
+
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+
+	switch(num)
+	{
+		case 3:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 1);
+			break;
+		case 1:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 1);
+			break;
+		case 2:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+			break;
+		default:
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 1);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 1);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+			break;
+	}
 }
 
 void turnPumpOff()
 {
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 0); // docelowo ma tu byc pin wlaczajacy pompke
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 0); // docelowo ma tu byc pin wlaczajacy pompke
 }
 
 void turnLedsOff()
 {
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 0); // docelowo ma tu byc pin wlaczajacy pompke
+
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
 }
 
