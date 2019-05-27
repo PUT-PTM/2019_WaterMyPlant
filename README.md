@@ -9,24 +9,27 @@ Automatyczne podlewanie kwiatkow w 2 doniczkach. Połączone ze stroną internet
 ### Description
 
 ### Tools
-2 x STM32F411E-DISCO\
-2 x esp8266\
-2 x moisture sensor\
-2 x water level sensor\
-2 x water pump
-4 x tasma LED RGB
+1 x STM32F411E-DISCO\
+1 x esp8266\
+1 x moisture sensor\
+1 x water pump\
+3 x RGB DIODE
 
 
 ### How to run
+Aby odpalić program należy podłączyć płytkę stm do zasilania i zainstalować na niej
+projekt znajdujący się w WaterMyPlant/PTM
 
 ### How to compile
+Aby skompilować należy pobrać z repozytorium katalog WaterMyPlant i wrzucić go
+do SystemWorkbench
 
 ### Future improvements
+1. Więcej diod
 
-### Attributuions
+### Attributions
 
 ### License
-
 
 
 The project was conducted during the Microprocessor Lab course held by the Institute of Control and Information Engineering, Poznan University of Technology.
