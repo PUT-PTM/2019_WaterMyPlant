@@ -65,7 +65,7 @@ uint16_t measureHumidity()
 
 void turnPumpOn()
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 1); // docelowo ma tu byc pin wlaczajacy pompke
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 0); // docelowo ma tu byc pin wlaczajacy pompke
 }
 /*
  * 1 - zielona dioda - stan normalny - zwykle podlewanie
@@ -74,7 +74,7 @@ void turnPumpOn()
  */
 void turnLedsOn(int num)
 {
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 1); // docelowo ma tu byc pin wlaczajacy pompke
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 1);
 
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 0);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
@@ -85,10 +85,10 @@ void turnLedsOn(int num)
 		case 3:
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 1);
 			break;
-		case 1:
+		case 2:
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 1);
 			break;
-		case 2:
+		case 1:
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
 			break;
 		default:
@@ -101,7 +101,7 @@ void turnLedsOn(int num)
 
 void turnPumpOff()
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 0); // docelowo ma tu byc pin wlaczajacy pompke
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 1); // docelowo ma tu byc pin wlaczajacy pompke
 }
 
 void turnLedsOff()
