@@ -25,8 +25,9 @@ Aby skompilować należy pobrać z repozytorium katalog WaterMyPlant i wrzucić 
 do SystemWorkbench
 
 ### Future improvements
-1. Więcej diod
-
+1. Więcej diod wskazujących poziom nawodnienia
+2. Usprawnienia na stronie i przekazywanie parametrów na stronę internetową
+3. Dodanie oświetlenia roślinki
 ### Attributions
 
 ### License
