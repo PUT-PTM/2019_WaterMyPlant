@@ -69,7 +69,16 @@
               scrolling="no"
               allowfullscreen="true">
       </iframe>
-      <a id = "addPoint" class="btn-get-started scrollto" onclick="addPoint()" name="addPoint">Add point</a>
+      <a id = "addPoint" class="btn-get-started scrollto" onclick="
+        setTimeout( addPoint, 1000 );
+        var div = document.getElementById('addPoint');
+        div.style.color = '#f08fff';
+        div.style.background = '#6c757d';
+        // div.style.color = '#f08fff';
+        // div.style.background = '#fff';
+">
+
+        Add point</a>
     </div>
   </section><!-- #hero -->
 
@@ -173,4 +182,10 @@
         .always(() => {});
         // dotąd.
     }
+
+    function myfunction() {
+      alert( "delayed" );
+    }
+
+
 </script>
