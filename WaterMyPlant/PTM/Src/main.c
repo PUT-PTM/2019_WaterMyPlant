@@ -140,11 +140,11 @@ int main(void)
 
 	  HAL_ADC_Start(&hadc1);
 
-	  if(HAL_ADC_PollForConversion(&hadc1) == HAL_OK)
-	  {
-		  uint16_t humi = (HAL_ADC_GetValue(&hadc1));
-		  setHumidity(humi);
-	  }
+	  if(HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
+	  	  {
+	  		  uint16_t humi = (HAL_ADC_GetValue(&hadc1));
+	  		  setHumidity(humi);
+	  	  }
 
 
 	  if ( flowerService(canWater) == 1 ){

@@ -40,7 +40,7 @@ void waterMyPlant(){
 	 }
 	 else if (measuredHumidity > maxHumidity){
 		 turnLedsOn(3);
-		 HAL_Delay(1000);
+		 HAL_Delay(6000);
 		 turnLedsOff();
 	 }
 	 else if (measuredHumidity < minHumidity){
