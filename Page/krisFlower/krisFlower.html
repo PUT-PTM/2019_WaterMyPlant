@@ -152,7 +152,7 @@
         updatePoints();
  }
     function checkEvery(){
-        setInterval(updatePoints, 100);
+        setInterval(updatePoints, 1000);
     }
     
     function updatePoints(){
@@ -167,7 +167,7 @@
             res.forEach(el => {
             console.log(el.flowerState);
             document.getElementById("flowerPoints1").innerHTML = el.flowerState;
-            document.getElementById("flowerPoints2").innerHTML = el.flowerState;
+//            document.getElementById("flowerPoints2").innerHTML = el.flowerState;
             })
         })
         .always(() => {});
