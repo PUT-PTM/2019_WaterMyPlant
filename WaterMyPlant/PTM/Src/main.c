@@ -140,11 +140,12 @@ int main(void)
 
 	  HAL_ADC_Start(&hadc1);
 
-	  if(HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
+	  if(HAL_ADC_PollForConversion(&hadc1) == HAL_OK)
 	  {
 		  uint16_t humi = (HAL_ADC_GetValue(&hadc1));
 		  setHumidity(humi);
 	  }
+
 
 	  if ( flowerService(canWater) == 1 ){
 		  canWater = 0;
@@ -323,6 +324,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();

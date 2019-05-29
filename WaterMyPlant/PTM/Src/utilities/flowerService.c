@@ -26,8 +26,8 @@ uint16_t flowerService(uint16_t canWater){
 }
 
 void waterMyPlant(){
-	uint16_t minHumidity = 500;
-	uint16_t maxHumidity = 2000;
+	uint16_t minHumidity = 120;
+	uint16_t maxHumidity = 750;
 	uint16_t measuredHumidity = measureHumidity();
 
 
